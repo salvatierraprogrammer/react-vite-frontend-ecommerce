@@ -19,13 +19,12 @@ const ProductList = ({ search, category }) => {
       spacing={2} 
       sx={{ 
         marginBottom: 5, 
-        justifyContent: "center", // Centramos los productos
-        flexWrap: "wrap", // Aseguramos que el contenido se ajuste a varias filas
+        justifyContent: "center", 
       }} 
     >
       {filteredProducts.length > 0 ? (
         filteredProducts.map((product) => (
-          <Grid item xs={12} sm={6} md={3} lg={3} key={product.id}>
+          <Grid item xs={6} sm={6} md={3} lg={3} key={product.id}>
             <Card 
               sx={{ 
                 cursor: "pointer", 
@@ -33,14 +32,15 @@ const ProductList = ({ search, category }) => {
                 flexDirection: "column", 
                 justifyContent: "space-between",
                 height: "100%", 
-                maxWidth: 250, // Ajustamos el tamaño de las tarjetas para que no sean tan grandes
-                margin: "0 auto", // Centramos las tarjetas dentro de su contenedor
+                width: "100%", // Ocupar todo el ancho disponible
+                maxWidth: 180, // Reducimos para que quepan bien en pantallas pequeñas
+                margin: "0 auto", 
               }} 
               onClick={() => navigate(`/product/${product.id}`)}
             >
               <CardMedia 
                 component="img" 
-                height="180" 
+                height="160" 
                 image={product.img} 
                 alt={product.name} 
                 loading="lazy"
@@ -54,7 +54,7 @@ const ProductList = ({ search, category }) => {
                     fontWeight: "bold", 
                     display: "-webkit-box",
                     WebkitBoxOrient: "vertical",
-                    WebkitLineClamp: 2, // Permite hasta 2 líneas antes de cortar
+                    WebkitLineClamp: 2, 
                     overflow: "hidden"
                   }}
                 >

@@ -17,21 +17,11 @@ const ProductDetail = () => {
 
   const [quantity, setQuantity] = useState(1); // Estado para la cantidad seleccionada
 
-  const handleIncrease = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1); // Incrementa la cantidad
-  };
-
-  const handleDecrease = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1); // Decrementa la cantidad si es mayor a 1
-    }
-  };
+  const handleIncrease = () => setQuantity((prev) => prev + 1);
+  const handleDecrease = () => setQuantity((prev) => Math.max(1, prev - 1));
 
   const handleAddToCart = () => {
-    if (quantity > 0) {
-      // Lógica para agregar al carrito
-      console.log(`Añadir ${quantity} ${product.name} al carrito`);
-    }
+    console.log(`Añadir ${quantity} ${product.name} al carrito`);
   };
 
   return (
@@ -58,30 +48,18 @@ const ProductDetail = () => {
 
           {/* Controles modernos para seleccionar cantidad */}
           <Box sx={{ mt: 3, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <IconButton 
-              onClick={handleDecrease} 
-              disabled={quantity <= 1} 
-              sx={{ borderRadius: "50%", backgroundColor: "#f4f4f4", p: 1 }}
-            >
+            <IconButton onClick={handleDecrease} sx={{ borderRadius: "50%", backgroundColor: "#f4f4f4", p: 1 }}>
               <RemoveIcon />
             </IconButton>
             <Typography variant="h6" sx={{ mx: 2 }}>{quantity}</Typography>
-            <IconButton 
-              onClick={handleIncrease} 
-              sx={{ borderRadius: "50%", backgroundColor: "#f4f4f4", p: 1 }}
-            >
+            <IconButton onClick={handleIncrease} sx={{ borderRadius: "50%", backgroundColor: "#f4f4f4", p: 1 }}>
               <AddIcon />
             </IconButton>
           </Box>
 
           {/* Botón para añadir al carrito */}
           <Box sx={{ mt: 2 }}>
-            <Button 
-              variant="contained" 
-              sx={{ width: "100%" }} 
-              onClick={handleAddToCart}
-              disabled={quantity <= 0} // Deshabilita el botón si la cantidad es cero o menor
-            >
+            <Button variant="contained" sx={{ width: "100%" }} onClick={handleAddToCart}>
               Añadir al Carrito
             </Button>
           </Box>
@@ -95,8 +73,8 @@ const ProductDetail = () => {
           </Typography>
           <Grid container spacing={2} sx={{ justifyContent: "center" }}>
             {recommendedProducts.map((recProduct) => (
-              <Grid item xs={12} sm={6} md={3} key={recProduct.id}>
-                <Card sx={{ display: "flex", flexDirection: "column", height: "100%", boxShadow: 2, borderRadius: 2 }}>
+              <Grid item xs={6} sm={6} md={3} key={recProduct.id}>
+                <Card sx={{ display: "flex", flexDirection: "column", height: "100%", width: "100%", minHeight: 280, boxShadow: 2, borderRadius: 2 }}>
                   <CardMedia 
                     component="img" 
                     height="180" 
@@ -113,10 +91,10 @@ const ProductDetail = () => {
                     </Typography>
                   </CardContent>
                   <Box sx={{ textAlign: "center", pb: 2 }}>
-                  <Button 
+                    <Button 
                       variant="contained" 
                       fullWidth 
-                      onClick={() => navigate(`/product/${recProduct.id}`)} // Navegar al detalle del producto
+                      onClick={() => navigate(`/product/${recProduct.id}`)}
                     >
                       Comprar
                     </Button>

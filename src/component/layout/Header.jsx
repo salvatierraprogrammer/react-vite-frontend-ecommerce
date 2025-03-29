@@ -1,6 +1,7 @@
 import { AppBar, Toolbar, Typography, IconButton, TextField, Box, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";  
+import shop from '../../assets/shop.png'
 
 const Header = ({ onSearch, cart }) => {
   const navigate = useNavigate();
@@ -21,13 +22,12 @@ const Header = ({ onSearch, cart }) => {
   return (
     <AppBar position="static" color="primary">
       <Toolbar>
-        {/* Logo clickeable */}
         <Typography 
           variant="h6" 
           sx={{ flexGrow: 1, cursor: "pointer" }} 
           onClick={handleLogoClick}
         >
-          Mi eCommerce
+          <img src={shop} alt="Logo" style={{ height: 60, cursor: 'pointer' }} /> 
         </Typography>
         
         {/* Buscador */}
