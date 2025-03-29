@@ -6,6 +6,9 @@ import Header from "./component/layout/Header";
 import Footer from "./component/layout/Footer";
 import { useState } from "react";
 import Cart from "./page/Cart";
+import Profile from "./page/Profile";
+import Myshop from "./page/Myshop";
+import Favorite from "./page/Favorite";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,6 +28,10 @@ function App() {
             <Route path="/" element={<HomePage searchTerm={searchTerm} />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/favorite" element={<Favorite />} />
+            <Route path="/myshop" element={<Myshop />} />
+
           </Routes>
         </Box>
         <Footer />

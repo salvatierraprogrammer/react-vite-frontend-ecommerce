@@ -2,15 +2,22 @@ import React, { useState } from "react";
 import { Container, Typography, Grid } from "@mui/material";
 import ProductList from "../component/ProductList";
 import CategoryFilter from "../component/CategoryFilter";
+import SearchBar from "../component/SearchBar";
 
-const HomePage = ({ searchTerm }) => {
-    const [selectedCategory, setSelectedCategory] = useState("Todos"); 
+const HomePage = () => {
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <Container sx={{ mt: 3 }}>
       <Typography variant="h4" gutterBottom>
-        Catálogo de Productos
+        🛒 Catálogo de Productos
       </Typography>
+      
+      {/* Barra de búsqueda */}
+      <SearchBar onSearch={setSearchTerm} />
 
+      {/* Filtro de categorías */}
       <CategoryFilter selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} />
 
       {/* Lista de productos filtrados */}
