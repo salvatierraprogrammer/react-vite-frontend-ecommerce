@@ -10,7 +10,15 @@ const HomePage = () => {
 
   return (
     <Container sx={{ mt: 3 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{
+          textAlign: "center",
+          fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" }, // Responsivo
+          fontWeight: "bold",
+        }}
+      >
         🛒 Catálogo de Productos
       </Typography>
       

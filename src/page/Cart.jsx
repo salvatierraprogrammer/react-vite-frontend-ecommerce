@@ -103,6 +103,13 @@ const Cart = () => {
       <FormControl sx={{ mt: 3 }}>
         <FormLabel>Selecciona el método de pago</FormLabel>
         <RadioGroup value={paymentMethod} onChange={handlePaymentChange}>
+        <FormControlLabel
+            value="efectivo"
+            control={<Radio />}
+            label="Efectivo"
+            labelPlacement="end"
+            icon={<PaymentIcon sx={{ marginRight: 1 }} />}
+          />
           <FormControlLabel
             value="tarjeta"
             control={<Radio />}
@@ -110,13 +117,7 @@ const Cart = () => {
             labelPlacement="end"
             icon={<CreditCardIcon sx={{ marginRight: 1 }} />}
           />
-          <FormControlLabel
-            value="efectivo"
-            control={<Radio />}
-            label="Efectivo"
-            labelPlacement="end"
-            icon={<PaymentIcon sx={{ marginRight: 1 }} />}
-          />
+          
           <FormControlLabel
             value="mercadoPago"
             control={<Radio />}
