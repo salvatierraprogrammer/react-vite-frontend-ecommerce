@@ -88,7 +88,14 @@ function MiPanel() {
       <SearchBar setSearchTerm={setSearchTerm} />
       <CategoryFilter selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} />
 
-      <Grid container spacing={3} sx={{ mt: 2, justifyContent: 'center', alignItems: 'center' }}>
+      <Grid 
+           container 
+           spacing={2} 
+           sx={{ 
+             marginBottom: 5, 
+             justifyContent: "center", 
+           }} 
+         >
         {filteredProducts.length > 0 ? (
           filteredProducts.map(product => (
             <Grid item xs={6} sm={6} md={3} lg={3} key={product.id} sx={{ display: 'flex', justifyContent: 'center' }}>
