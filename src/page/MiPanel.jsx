@@ -92,7 +92,7 @@ function MiPanel() {
       <Grid container spacing={3} sx={{ mt: 2, justifyContent: 'center', alignItems: 'center' }}>
   {filteredProducts.length > 0 ? (
     filteredProducts.map(product => (
-      <Grid item xs={12} sm={6} md={4} lg={3} key={product.id} sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Grid item xs={6} sm={6} md={3} lg={3} key={product.id} sx={{ display: 'flex', justifyContent: 'center' }}>
         <Card
           sx={{
             cursor: "pointer",
