@@ -11,14 +11,42 @@ const products = [
 const FavoritePage = () => {
   const navigate = useNavigate();
   const [favorites, setFavorites] = useState(products);
+  const [favoriteStatus, setFavoriteStatus] = useState(
+    products.reduce((acc, product) => ({ ...acc, [product.id]: true }), {}) // Inicializa todos los productos como favoritos
+  );
+
+  const toggleFavorite = (productId) => {
+    setFavoriteStatus((prevState) => ({
+      ...prevState,
+      [productId]: !prevState[productId], // Alterna el estado de favorito
+    }));
+  };
 
   const removeFromFavorites = (productId) => {
     setFavorites(favorites.filter((product) => product.id !== productId));
+    setFavoriteStatus((prevState) => {
+      const newState = { ...prevState };
+      delete newState[productId]; // Elimina el estado de favorito cuando se elimina el producto
+      return newState;
+    });
   };
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Typography variant="h4" sx={{ mb: 3, fontWeight: "bold", textAlign: "center" }}>Favoritos</Typography>
+        <Typography 
+        variant="h4" 
+        sx={{ 
+          mb: 3, 
+          fontWeight: "bold", 
+          textAlign: "center", 
+          display: "flex", 
+          alignItems: "center", 
+          justifyContent: "center" 
+        }}
+      >
+        <Favorite sx={{ color: "red", mr: 1 }} />  {/* Corazón rojo */}
+        Favoritos
+      </Typography>
       <Grid container spacing={2} justifyContent="center">
         {favorites.length > 0 ? (
           favorites.map((product) => (
@@ -33,9 +61,27 @@ const FavoritePage = () => {
                   width: "100%", // Ocupar todo el ancho disponible
                   maxWidth: 180, // Reducimos para que quepan bien en pantallas pequeñas
                   margin: "0 auto", 
+                  position: "relative" // Necesario para posicionar el corazón en la esquina
                 }} 
                 onClick={() => navigate(`/product/${product.id}`)}
               >
+                <Box 
+                  sx={{
+                    position: "absolute", // Posiciona el corazón en la esquina
+                    top: 10,
+                    right: 10,
+                    zIndex: 1, // Asegura que el corazón esté encima de la imagen
+                  }}
+                >
+                  <IconButton 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite(product.id); // Cambia el estado de favorito
+                    }}
+                  >
+                    <Favorite color={favoriteStatus[product.id] ? "error" : "disabled"} /> {/* Cambia el color según el estado */}
+                  </IconButton>
+                </Box>
                 <CardMedia 
                   component="img" 
                   height="160" 
