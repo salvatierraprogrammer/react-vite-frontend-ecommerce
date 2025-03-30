@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Typography, Card, CardMedia, CardContent, Button, Box, IconButton } from "@mui/material";
+import { Container, Typography, Card, CardMedia, CardContent, Button, Box, IconButton, Modal } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useState } from "react";
@@ -11,6 +11,9 @@ const ProductDetail = () => {
     const product = data.find((p) => p.id === parseInt(id));
     const navigate = useNavigate();
 
+    const [quantity, setQuantity] = useState(1);
+    const [openModal, setOpenModal] = useState(false); // Estado para controlar el modal
+
     if (!product) {
         return <Typography variant="h5">Producto no encontrado</Typography>;
     }
@@ -19,11 +22,13 @@ const ProductDetail = () => {
         (p) => p.category === product.category && p.id !== product.id
     );
 
-    const [quantity, setQuantity] = useState(1);
     const handleIncrease = () => setQuantity((prev) => prev + 1);
     const handleDecrease = () => setQuantity((prev) => Math.max(1, prev - 1));
+
     const handleAddToCart = () => {
         console.log(`Añadir ${quantity} ${product.name} al carrito`);
+        setOpenModal(true); // Abrir el modal cuando se añade al carrito
+        setTimeout(() => setOpenModal(false), 2000); // Cerrar el modal después de 2 segundos
     };
 
     return (
@@ -46,7 +51,7 @@ const ProductDetail = () => {
                     
                     {/* Corregido: Validamos que price sea un número antes de usar toFixed(2) */}
                     <Typography variant="h6" color="primary" sx={{ mt: 1 }}>
-                        ${Number(product.price) ? Number(product.price).toFixed(2) : "N/A"}
+                        ${Number(product.price.replace('$', '').trim()) ? Number(product.price.replace('$', '').trim()).toFixed(2) : "N/A"}
                     </Typography>
 
                     <Typography variant="body1" sx={{ mt: 2 }}>
@@ -74,6 +79,38 @@ const ProductDetail = () => {
             {recommendedProducts.length > 0 && (
                 <ProductRecommendations recommendedProducts={recommendedProducts} navigate={navigate} />
             )}
+
+            {/* Modal de confirmación */}
+            <Modal
+                open={openModal}
+                onClose={() => setOpenModal(false)}
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
+                <Box 
+                    sx={{ 
+                        bgcolor: 'white', 
+                        p: 4, 
+                        borderRadius: 2, 
+                        boxShadow: 24, 
+                        textAlign: 'center',
+                    }}
+                >
+                    <Typography variant="h6" sx={{ mb: 2 }}>
+                        ¡Producto agregado al carrito!
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => setOpenModal(false)}
+                    >
+                      OK
+                    </Button>
+                </Box>
+            </Modal>
         </Container>
     );
 };

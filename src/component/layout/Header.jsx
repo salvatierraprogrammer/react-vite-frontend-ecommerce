@@ -8,6 +8,7 @@ import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useNavigate } from "react-router-dom";  
 import shop from '../../assets/shop.png';
 import React from "react";
+import { Settings, SettingsInputComponent } from "@mui/icons-material";
 
 const Header = ({ cart }) => {
   const navigate = useNavigate();
@@ -47,6 +48,9 @@ const Header = ({ cart }) => {
         <IconButton color="inherit" onClick={() => navigate("/favorite")}>
           <FavoriteIcon />
         </IconButton>
+        <MenuItem onClick={() => { navigate("/miPanel"); handleCloseMenu(); }}>
+          <Settings sx={{ mr: 2 }} />
+        </MenuItem>
 
         {/* Menú hamburguesa */}
         <IconButton color="inherit" onClick={handleMenuClick}>
@@ -54,7 +58,11 @@ const Header = ({ cart }) => {
         </IconButton>
 
         {/* Menú desplegable */}
+       
         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu}>
+        <MenuItem onClick={() => { navigate("/miPanel"); handleCloseMenu(); }}>
+          <Settings sx={{ mr: 2 }} /> Mi panel
+        </MenuItem>
           <MenuItem onClick={() => { navigate("/"); handleCloseMenu(); }}>
             <StoreIcon sx={{ mr: 2 }} /> Tienda
           </MenuItem>

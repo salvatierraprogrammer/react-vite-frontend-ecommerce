@@ -9,6 +9,7 @@ import Cart from "./page/Cart";
 import Profile from "./page/Profile";
 import Myshop from "./page/Myshop";
 import Favorite from "./page/Favorite";
+import MiPanel from "./page/MiPanel";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -31,6 +32,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/favorite" element={<Favorite />} />
             <Route path="/myshop" element={<Myshop />} />
+            <Route path="/miPanel" element={<MiPanel />} />
 
           </Routes>
         </Box>
